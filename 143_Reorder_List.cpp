@@ -1,4 +1,5 @@
 //143. Reorder List
+//https://leetcode.com/problems/reorder-list/description/
 
 
 #include <bits/stdc++.h>
@@ -17,8 +18,6 @@ using namespace std;
 #define pb(i) push_back(i);
 #define C continue;
 #define B break;
-#define t true;
-#define f false;
 #define Y cout << "YES" << endl;
 #define no cout << "NO" << endl;
 #define printvv(v) fo(i,v.size()){{fo(j,v[0].size())cout<<v[i][j]<<" ";}lb}
@@ -47,35 +46,52 @@ public:
             curr = next;
         }
         head = prev;
-
         return head;
     }
     void reorderList(ListNode* head) {
-        ListNode* fh = head,sh = head;
+        if(!head || !head->next)return;
         int len = 0;
-        while(fh)fh = fh->next,len++;
-
-        int itr = 0;
-        ListNode* middle = nullptr,prev_middle = nullptr;
-        while(itr <= len/2){
-            itr++;
-            prev_middle = middle;
-            middle = middle->next;
+        ListNode* curr = head;
+        while(curr){
+            curr = curr->next;
+            len++;
         }
 
-        if(len%2 == 0){
-            middle = prev_middle;   
+        ListNode* half = head;
+        ListNode* prev_half = nullptr;
+        int t = len/2;
+        while(t--){
+            prev_half = half;
+            half = half->next;
         }
 
+        prev_half->next = nullptr;
 
+        ListNode* h2 = reverse(half);
+        ListNode* h1 = head;
 
-        
-
-
-        
+        bool one = true;
+        while(h1 and h2){
+            if(one){
+                ListNode* h1_next = h1->next;
+                h1->next = h2;
+                h1 = h1_next;
+            }else{
+                ListNode* h2_next = h2->next;
+                h2->next = h1;
+                h2 = h2_next;
+            }
+            one = !one;
+        }
     }
 };
 
 int main(){
     Solution sol;
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+    head->next->next->next = new ListNode(4);
+
+    sol.reorderList(head);
 }
