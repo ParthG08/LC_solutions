@@ -1,3 +1,5 @@
+//https://leetcode.com/problems/sudoku-solver/
+
 /// first i tried using the constrain method which was making the set of all the posisble integers of a particular block
 // and then removing the numbers from the set that is not possible. and then from repeating the same by filling in the ones that have 
 // only on possibility
