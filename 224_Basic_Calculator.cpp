@@ -1,6 +1,13 @@
 //https://leetcode.com/problems/basic-calculator/description/
 // Basic Calculator
 
+//I solved this question using the recursion so for each bracket it calls the function making it call about as many times 
+// as there is depth of the brackets in the string
+
+
+// what you can do instead acutally is basically you can make the it an O(n) solution by using the stack data structure
+// now submit another solution called basic calculator 2 with the stack solution.
+
 
 #include <bits/stdc++.h>
 using namespace std; 
@@ -83,7 +90,7 @@ public:
 
 
 int main(){
-    system("cls");
+    system("clear");
     Solution sol;
     vector<pair<string, int>> testCases = {
         {"1 + 1", 2},
