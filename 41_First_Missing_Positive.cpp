@@ -21,14 +21,52 @@ using namespace std;
 #define printbool(flag) if(flag){Y;}else{no;}
 const int mod=1e9+7;
 
-
 class Solution {
 public:
-    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
-        
+    void swap(int &i,int &j){
+        int temp = i;
+        i = j;
+        j = temp;
+    }
+    int firstMissingPositive(vector<int>& nums) {
+        for (auto it = nums.begin(); it != nums.end(); ) {
+            if (*it <= 0)
+                it = nums.erase(it);  // erase returns next valid iterator
+            else
+                ++it;
+        }
+
+        // cout << "this is the array after the first iteration" << endl;
+        // printv(nums);
+
+        int n = nums.size();
+        for(int i=0;i<n;i++){
+            if(nums[i] > n)continue;
+            
+            while(nums[i] < n and nums[i] >= 0 and nums[i] != nums[nums[i]-1]){
+                swap(nums[i],nums[nums[i]-1]);
+            }
+        } 
+
+        // cout << "this is the array after the second iteration" << endl;
+        // printv(nums);
+
+        int idx = 0;
+        while(idx < n){
+            if(nums[idx] != idx+1){
+                return idx+1;
+            }
+            idx++;
+        }
+
+        return idx+1;
     }
 };
 
 int main(){
     Solution sol;
+    vector<int> nums = {100000, 3, 4000, 2, 15, 1, 99999};
+    int ans = sol.firstMissingPositive(nums);
+
+    cout << "This is the ans : " << ans << endl;
 }
